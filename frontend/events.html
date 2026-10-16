@@ -1,0 +1,5 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Events · College Events</title><link rel="stylesheet" href="/css/style.css"></head><body>
+<div class="wrap"><h2>All Events</h2><div class="bar"><input id="q" placeholder="Search events..."><select id="cat"><option value="">All categories</option><option>Technical</option><option>Cultural</option><option>Sports</option><option>General</option></select></div><div class="grid" id="list"></div></div>
+<script src="/js/app.js"></script><script>initLayout();
+async function load(){const ev=await api("/events?q="+encodeURIComponent(q.value)+"&category="+cat.value);list.innerHTML=ev.map(eventCard).join("")||"<p class=muted>No events match.</p>"}
+q.oninput=cat.onchange=load;load();</script></body></html>

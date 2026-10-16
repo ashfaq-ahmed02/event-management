@@ -1,0 +1,40 @@
+:root{--navy:#14284b;--gold:#c9a227;--bg:#f4f6fa;--ink:#1d2433;--mut:#5f6b7f;--line:#dde3ee;--ok:#1b7f4b;--bad:#b3261e}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+a{color:var(--navy)}
+.nav{background:var(--navy);display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:64px;position:sticky;top:0;z-index:10}
+.nav .brand{color:#fff;font-weight:700;font-size:1.15rem;text-decoration:none;border-left:4px solid var(--gold);padding-left:10px}
+.nav .links a{color:#d7deee;text-decoration:none;margin-left:22px;font-size:.95rem}
+.nav .links a:hover{color:var(--gold)}
+.hero{background:linear-gradient(135deg,var(--navy),#27457d);color:#fff;padding:72px 5%;text-align:center}
+.hero h1{margin:0 0 10px;font-size:2.3rem}.hero p{max-width:620px;margin:0 auto 24px;color:#d7deee}
+.wrap{max-width:1100px;margin:0 auto;padding:32px 5%}
+h2{color:var(--navy);margin:0 0 16px}
+.btn{display:inline-block;background:var(--navy);color:#fff;border:0;border-radius:6px;padding:9px 18px;font-size:.95rem;cursor:pointer;text-decoration:none}
+.btn:hover{opacity:.9}.btn.gold{background:var(--gold);color:#1d2433}.btn.line{background:#fff;color:var(--navy);border:1px solid var(--navy)}
+.btn.sm{padding:4px 10px;font-size:.8rem}.btn.bad{background:var(--bad)}.btn:disabled{background:#9aa5b8;cursor:not-allowed}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px;box-shadow:0 1px 3px rgba(20,40,75,.06)}
+.card h3{margin:8px 0 6px;color:var(--navy)}.muted{color:var(--mut);font-size:.9rem}
+.tag{display:inline-block;background:#e8edf8;color:var(--navy);font-size:.75rem;padding:2px 10px;border-radius:20px;font-weight:600}
+.tag.approved{background:#dff3e8;color:var(--ok)}.tag.rejected{background:#fbe3e1;color:var(--bad)}.tag.pending{background:#fff3cd;color:#8a6d00}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;margin-bottom:28px}
+.stat{background:#fff;border-left:4px solid var(--gold);border-radius:8px;padding:16px;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stat b{display:block;font-size:1.9rem;color:var(--navy)}
+form.box{max-width:420px;margin:48px auto}
+label{display:block;font-weight:600;font-size:.88rem;margin:12px 0 4px}
+input,select,textarea{width:100%;padding:9px 11px;border:1px solid #c5cddd;border-radius:6px;font:inherit;background:#fff}
+.bar{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap}.bar input{flex:2}.bar select{flex:1}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden;font-size:.9rem}
+th{background:#eef2f9;color:var(--navy);text-align:left}th,td{padding:10px 12px;border-bottom:1px solid var(--line)}
+.scroll{overflow-x:auto;margin-bottom:28px}.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:700px){.two{grid-template-columns:1fr}.nav .links a{margin-left:12px}}
+.msg{padding:10px 14px;border-radius:6px;margin:12px 0;background:#fbe3e1;color:var(--bad)}.msg.ok{background:#dff3e8;color:var(--ok)}
+footer{text-align:center;color:var(--mut);padding:28px;font-size:.85rem}
+#chat-btn{position:fixed;right:22px;bottom:22px;width:56px;height:56px;border-radius:50%;background:var(--gold);border:0;font-size:1.5rem;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25);z-index:50}
+#chat-box{position:fixed;right:22px;bottom:90px;width:320px;max-width:calc(100vw - 44px);height:420px;background:#fff;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.25);display:none;flex-direction:column;overflow:hidden;z-index:50}
+#chat-box header{background:var(--navy);color:#fff;padding:12px 14px;font-weight:600}
+#chat-log{flex:1;overflow-y:auto;padding:12px;background:var(--bg)}
+.b{padding:8px 12px;border-radius:12px;margin:6px 0;max-width:85%;white-space:pre-wrap;font-size:.9rem}
+.b.bot{background:#fff;border:1px solid var(--line)}.b.me{background:var(--navy);color:#fff;margin-left:auto}
+#chat-form{display:flex;gap:6px;padding:8px;border-top:1px solid var(--line)}

@@ -1,0 +1,6 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Home · College Events</title><link rel="stylesheet" href="/css/style.css"></head><body>
+<div class="hero"><h1>Discover. Register. Participate.</h1><p>One place for every technical, cultural and sports event on campus.</p><a class="btn gold" href="/events.html">Browse Events</a></div>
+<div class="wrap"><div class="stats" id="stats"></div><h2>Upcoming Events</h2><div class="grid" id="list"></div></div>
+<script src="/js/app.js"></script><script>initLayout();
+api("/stats").then(s=>{stats.innerHTML=[["events","Events"],["students","Students"],["registrations","Registrations"],["documents","Documents"]].map(([k,l])=>`<div class="stat"><b>${s[k]}</b>${l}</div>`).join("")});
+api("/events").then(ev=>list.innerHTML=ev.slice(0,3).map(eventCard).join("")||"<p class=muted>No events yet.</p>");</script></body></html>
