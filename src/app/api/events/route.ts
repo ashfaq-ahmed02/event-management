@@ -3,6 +3,8 @@ import { db } from '@/lib/db';
 import { requireAdmin } from '@/lib/auth';
 import { CampusEvent } from '@/lib/types';
 
+export const dynamic = 'force-dynamic';
+
 // GET /api/events - List events with optional category and search filters
 export async function GET(req: NextRequest) {
   try {

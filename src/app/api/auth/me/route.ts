@@ -3,6 +3,8 @@ import { getSessionFromRequest } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { User } from '@/lib/types';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(req: NextRequest) {
   try {
     const session = await getSessionFromRequest(req);

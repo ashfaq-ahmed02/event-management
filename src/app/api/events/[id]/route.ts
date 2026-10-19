@@ -3,6 +3,8 @@ import { db } from '@/lib/db';
 import { getSessionFromRequest, requireAdmin } from '@/lib/auth';
 import { CampusEvent, Registration } from '@/lib/types';
 
+export const dynamic = 'force-dynamic';
+
 interface RouteContext {
   params: { id: string };
 }

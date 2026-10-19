@@ -3,6 +3,8 @@ import { db } from '@/lib/db';
 import { requireAdmin } from '@/lib/auth';
 import { Registration } from '@/lib/types';
 
+export const dynamic = 'force-dynamic';
+
 interface RouteContext {
   params: { id: string };
 }

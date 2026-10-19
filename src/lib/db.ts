@@ -1,6 +1,5 @@
 import { DatabaseSync } from 'node:sqlite';
 import path from 'node:path';
-import fs from 'node:fs';
 
 const DB_DIR = process.cwd();
 const DB_PATH = path.join(DB_DIR, 'campusevent.db');

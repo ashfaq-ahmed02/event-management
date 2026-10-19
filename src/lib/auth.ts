@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';
-import { AuthSession, UserRole } from './types';
+import { AuthSession } from './types';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'campusevent-super-secret-jwt-key-2026';
 const TOKEN_EXPIRY = '7d';
@@ -12,7 +12,7 @@ export function signToken(payload: AuthSession): string {
 export function verifyToken(token: string): AuthSession | null {
   try {
     return jwt.verify(token, JWT_SECRET) as AuthSession;
-  } catch (error) {
+  } catch {
     return null;
   }
 }

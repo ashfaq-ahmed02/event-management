@@ -3,6 +3,8 @@ import { db } from '@/lib/db';
 import { requireAuth } from '@/lib/auth';
 import { Registration } from '@/lib/types';
 
+export const dynamic = 'force-dynamic';
+
 // GET /api/registrations/my - Get current user's registered events
 export async function GET(req: NextRequest) {
   try {
