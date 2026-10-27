@@ -78,7 +78,7 @@ export default function ChatWidget() {
         };
         setMessages((prev) => [...prev, errorMsg]);
       }
-    } catch (err) {
+    } catch {
       const errorMsg: ChatMessage = {
         id: `bot-err-${Date.now()}`,
         sender: 'bot',

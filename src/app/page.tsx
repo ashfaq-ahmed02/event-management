@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { CampusEvent, EventCategory } from '@/lib/types';
 import { 
@@ -23,7 +23,7 @@ export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const fetchEvents = async () => {
+  const fetchEvents = useCallback(async () => {
     try {
       setLoading(true);
       let url = '/api/events';
@@ -44,14 +44,14 @@ export default function HomePage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedCategory, searchQuery]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       fetchEvents();
     }, 200);
     return () => clearTimeout(timer);
-  }, [selectedCategory, searchQuery]);
+  }, [fetchEvents]);
 
   const getCategoryColor = (cat: string) => {
     switch (cat) {

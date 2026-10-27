@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import { Registration } from '@/lib/types';
@@ -16,7 +16,7 @@ export default function DashboardPage() {
   const [cancellingId, setCancellingId] = useState<number | null>(null);
   const [authModalOpen, setAuthModalOpen] = useState(false);
 
-  const fetchMyRegistrations = async () => {
+  const fetchMyRegistrations = useCallback(async () => {
     if (!token) return;
     try {
       setLoading(true);
@@ -32,7 +32,7 @@ export default function DashboardPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [token]);
 
   useEffect(() => {
     if (user && token) {
@@ -40,7 +40,7 @@ export default function DashboardPage() {
     } else {
       setLoading(false);
     }
-  }, [user, token]);
+  }, [user, token, fetchMyRegistrations]);
 
   const handleCancelRegistration = async (eventId: number, regId: number) => {
     if (!confirm('Are you sure you want to cancel this event pass? Your seat will be released.')) {
@@ -59,7 +59,7 @@ export default function DashboardPage() {
       } else {
         alert('Failed to cancel pass. Please try again.');
       }
-    } catch (err) {
+    } catch {
       alert('Network error. Could not cancel pass.');
     } finally {
       setCancellingId(null);

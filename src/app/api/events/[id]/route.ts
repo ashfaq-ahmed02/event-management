@@ -55,7 +55,7 @@ export async function GET(req: NextRequest, { params }: RouteContext) {
 // PUT /api/events/:id - Update event (Admin only)
 export async function PUT(req: NextRequest, { params }: RouteContext) {
   try {
-    const { session, errorResponse } = await requireAdmin(req);
+    const { errorResponse } = await requireAdmin(req);
     if (errorResponse) return errorResponse;
 
     const eventId = parseInt(params.id, 10);
@@ -121,7 +121,7 @@ export async function PUT(req: NextRequest, { params }: RouteContext) {
 // DELETE /api/events/:id - Delete event (Admin only)
 export async function DELETE(req: NextRequest, { params }: RouteContext) {
   try {
-    const { session, errorResponse } = await requireAdmin(req);
+    const { errorResponse } = await requireAdmin(req);
     if (errorResponse) return errorResponse;
 
     const eventId = parseInt(params.id, 10);

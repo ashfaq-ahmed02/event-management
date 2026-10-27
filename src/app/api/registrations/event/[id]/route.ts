@@ -12,7 +12,7 @@ interface RouteContext {
 // GET /api/registrations/event/:id - Get attendee list for specific event (Admin only)
 export async function GET(req: NextRequest, { params }: RouteContext) {
   try {
-    const { session, errorResponse } = await requireAdmin(req);
+    const { errorResponse } = await requireAdmin(req);
     if (errorResponse) return errorResponse;
 
     const eventId = parseInt(params.id, 10);

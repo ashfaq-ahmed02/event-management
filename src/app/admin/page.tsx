@@ -117,7 +117,7 @@ export default function AdminPage() {
       } else {
         alert('Failed to delete event');
       }
-    } catch (err) {
+    } catch {
       alert('Network error deleting event');
     }
   };
@@ -264,10 +264,24 @@ export default function AdminPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-800/60 text-slate-300">
-              {events.map((e) => {
-                const percent = Math.min(100, Math.round((e.registered_count / e.capacity) * 100));
-                return (
-                  <tr key={e.id} className="hover:bg-slate-800/40 transition">
+              {loading ? (
+                <tr>
+                  <td colSpan={6} className="py-12 text-center text-slate-400">
+                    <div className="inline-block animate-spin w-6 h-6 border-2 border-indigo-500 border-t-transparent rounded-full mb-2"></div>
+                    <div>Loading campus events...</div>
+                  </td>
+                </tr>
+              ) : events.length === 0 ? (
+                <tr>
+                  <td colSpan={6} className="py-12 text-center text-slate-400">
+                    No events scheduled yet. Click &quot;+ Create Event&quot; to add one.
+                  </td>
+                </tr>
+              ) : (
+                events.map((e) => {
+                  const percent = Math.min(100, Math.round((e.registered_count / e.capacity) * 100));
+                  return (
+                    <tr key={e.id} className="hover:bg-slate-800/40 transition">
                     <td className="py-4 px-4 font-semibold text-white">
                       <Link href={`/events/${e.id}`} className="hover:text-indigo-400 transition">
                         {e.title}
@@ -318,7 +332,7 @@ export default function AdminPage() {
                     </td>
                   </tr>
                 );
-              })}
+              }))}
             </tbody>
           </table>
         </div>
@@ -358,7 +372,7 @@ export default function AdminPage() {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-3 gap-3">
                 <div>
                   <label className="block text-slate-300 font-medium mb-1">Category *</label>
                   <select
@@ -375,13 +389,25 @@ export default function AdminPage() {
                 </div>
 
                 <div>
-                  <label className="block text-slate-300 font-medium mb-1">Total Capacity *</label>
+                  <label className="block text-slate-300 font-medium mb-1">Capacity *</label>
                   <input
                     type="number"
                     required
                     min="1"
                     value={capacity}
                     onChange={(e) => setCapacity(e.target.value)}
+                    className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-white text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-slate-300 font-medium mb-1">Fee ($ / 0 = Free)</label>
+                  <input
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
                     className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-white text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                 </div>

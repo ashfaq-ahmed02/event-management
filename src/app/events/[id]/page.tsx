@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import { CampusEvent, Registration } from '@/lib/types';
@@ -25,7 +25,7 @@ export default function EventDetailPage() {
   const [message, setMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
   const [authModalOpen, setAuthModalOpen] = useState(false);
 
-  const fetchEventData = async () => {
+  const fetchEventData = useCallback(async () => {
     try {
       setLoading(true);
       const res = await fetch(`/api/events/${eventId}`, {
@@ -42,13 +42,13 @@ export default function EventDetailPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [eventId, token]);
 
   useEffect(() => {
     if (eventId) {
       fetchEventData();
     }
-  }, [eventId, token]);
+  }, [eventId, fetchEventData]);
 
   const handleRegister = async () => {
     if (!user) {

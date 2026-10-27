@@ -5,6 +5,7 @@ const DB_DIR = process.cwd();
 const DB_PATH = path.join(DB_DIR, 'campusevent.db');
 
 let dbInstance: DatabaseSync | null = null;
+let isSeeded = false;
 
 export function getDatabase(): DatabaseSync {
   if (!dbInstance) {
@@ -14,6 +15,18 @@ export function getDatabase(): DatabaseSync {
       PRAGMA journal_mode = WAL;
     `);
     initSchema(dbInstance);
+  }
+  if (!isSeeded) {
+    isSeeded = true;
+    try {
+      const userCount = dbInstance.prepare('SELECT count(*) as count FROM users').get() as { count: number };
+      if (userCount && userCount.count === 0) {
+        // Auto-seed initial events and demo users asynchronously if empty
+        import('./seed').then((m) => m.seedDatabase()).catch(() => {});
+      }
+    } catch {
+      // Fallback if table query fails during schema init
+    }
   }
   return dbInstance;
 }
